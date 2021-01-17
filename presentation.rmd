@@ -1,0 +1,51 @@
+---
+title: "Developing Data Products"
+author: "Ram"
+date: "17/01/2021"
+output:
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## A Shiny Application
+
+- The shiny application pitched in this presentation is here [https://ramprashanth97.shinyapps.io/project/]
+
+- The Shiny app source code is here [https://github.com/ramprashanth97/Developing-Data-Products---Course-Project]
+
+## What does the app do?
+- Allows you to visualise the areas of US states in square miles using the US State Facts and Figures dataset. 
+
+- You can use sliders to select an area range to display and checkboxes to show different regions
+
+- The output is an interactive map of the US showing the states that satisfy the selected criteria.
+
+## Under the hood
+```{r}
+states <- data.frame(state.name, state.area, state.region,
+                     hover=paste0(state.name, ": ", 
+                                               state.area, " square miles"))
+states$hover <- as.character(states$hover)
+```
+
+- A data frame called `states` was created using the vectors from the US Facts and Figures Dataset.
+
+- A fourth column (`hover`) was added for the interactivity of the map.
+
+```{r, echo=TRUE}
+head(states)
+```
+
+
+
+## Output
+- The slider values and checkbox values are used to filter the dataset using the `state.name` and `state.region` columns before creating the map.
+
+- The output is a googlevis interactive map.
+
+- The states turn green when they satisfy the selected criteria (slider and checkboxes)
+
+- When each green state is hovered over, the name and area of the state is displayed.
